@@ -1,40 +1,62 @@
-/* Basic styling */
+/* "Ugly" foundation */
 body {
-    font-family: 'Comic Sans MS', cursive; /* A fun, fitting font */
-    background: #f0f8ff; /* Light blue background for a playful feel */
-    color: #333;
-    transition: background 0.5s ease-in-out;
+    font-family: 'Times New Roman', serif;
+    background: #ff00ff; /* Bright, clashing magenta */
+    color: #00ff00; /* Neon green text */
+    text-align: center;
+    overflow-x: hidden; /* Prevents horizontal scroll from animations */
 }
 
-/* Hover effect for the entire list */
-.code-list li {
-    list-style: none;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    cursor: pointer;
+/* Base styles for animated elements */
+.ugly-animated-element {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; /* Constant, predictable motion */
+    border: 3px solid #ffff00; /* A yellow border that adds to the clashing colors */
+    padding: 10px;
+    margin: 20px;
 }
 
-.code-list li:hover {
-    transform: translateY(-5px) scale(1.02); /* Lifts and slightly enlarges the item */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+/* Animations that are intentionally distracting */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-1deg); }
+    50% { transform: translateX(5px) rotate(1deg); }
+    75% { transform: translateX(-5px) rotate(-1deg); }
+    100% { transform: translateX(0); }
 }
 
-/* Animated background color on hover */
-.code-list li:hover .code {
-    background-color: #ffe4e1; /* A gentle, animated color change */
+@keyframes flash {
+    0%, 100% { background-color: #ff00ff; }
+    50% { background-color: #00ffff; } /* Flashes between two bright colors */
 }
 
-/* Keyframe animation for a subtle, constant motion */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.01); }
-    100% { transform: scale(1); }
+/* Apply specific animations */
+header, footer {
+    animation-name: shake;
 }
 
-.code-list li {
-    animation: pulse 3s infinite ease-in-out; /* Applies the pulse animation */
+section h2 {
+    animation-name: flash;
+}
+
+ul {
+    animation-name: shake;
+}
+
+li {
+    animation-name: shake;
+    /* We'll use JS for the hover effect here */
+}
+
+/* The magic part: PAUSE on hover */
+.ugly-animated-element:hover {
+    animation-play-state: paused; /* The animation stops completely */
+    cursor: default; /* Change cursor to indicate a paused state */
+}
+
+/* Optional: a subtle change on hover to give feedback */
+li:hover {
+    background-color: #333; /* A dark, non-flashing color */
+    color: white;
 }
