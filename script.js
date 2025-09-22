@@ -1,18 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const codeElements = document.querySelectorAll('.code');
+    const listItems = document.querySelectorAll('li.ugly-animated-element');
 
-    codeElements.forEach(codeElement => {
-        codeElement.addEventListener('click', () => {
-            const code = codeElement.textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                // User feedback for successful copy
-                codeElement.textContent = 'Copied!';
-                setTimeout(() => {
-                    codeElement.textContent = code; // Reset text after a delay
-                }, 1000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
+    listItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const currentColor = item.style.color;
+            // Cycle through some ugly colors on click
+            if (currentColor === 'rgb(0, 255, 0)') {
+                item.style.color = 'rgb(255, 255, 0)'; // Yellow
+            } else if (currentColor === 'rgb(255, 255, 0)') {
+                item.style.color = 'rgb(255, 0, 0)'; // Red
+            } else {
+                item.style.color = 'rgb(0, 255, 0)'; // Back to green
+            }
         });
     });
 });
